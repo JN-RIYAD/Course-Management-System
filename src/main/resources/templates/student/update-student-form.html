@@ -1,0 +1,48 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>update Student</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Update Student</h3>
+    <hr/>
+    <form th:action="@{/student/update}" th:object="${student}" method="POST">
+
+        <input type="text" th:field="*{name}" class="form-control col-4 mb-4" placeholder="Enter student name"/>
+
+        <input type="text" th:field="*{nameBn}" class="form-control col-4 mb-4" placeholder="Enter student nameBn"/>
+
+        <input type="number" th:field="*{roll}" class="form-control col-4 mb-4" placeholder="Enter student roll"/>
+
+        <input type="number" th:field="*{batch}" class="form-control col-4 mb-4" placeholder="Enter student batch"/>
+
+        <input type="text" th:field="*{email}" class="form-control col-4 mb-4" placeholder="Enter student email"/>
+
+        <input type="number" th:field="*{mobile}" class="form-control col-4 mb-4" placeholder="Enter student mobile number"/>
+
+        <input type="text" th:field="*{session}" class="form-control col-4 mb-4" placeholder="Enter session"/>
+
+        <input type="text" th:field="*{semester}" class="form-control col-4 mb-4" placeholder="Enter semester"/>
+
+        <input type="number" step=0.01 th:field="*{cgpa}" class="form-control col-4 mb-4" placeholder="Enter student cgpa"/>
+
+        <button type="submit" class="btn btn-primary col-2">Update</button>
+
+        <input type="hidden" th:field="*{id}"/>
+
+    </form>
+
+    <hr/>
+    <a th:href="@{/student/list}">Back to list</a>
+</div>
+
+</body>
+</html>
