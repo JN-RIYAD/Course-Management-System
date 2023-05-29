@@ -17,6 +17,7 @@ public class CourseController {
 
     @GetMapping({"/list", "/"})
     public ModelAndView getAllCourses() {
+ 
 
         ModelAndView mav = new ModelAndView("/course/list-courses");
 
@@ -26,6 +27,8 @@ public class CourseController {
     }
     @GetMapping("/addForm")
     public ModelAndView addForm() {
+
+
 
         ModelAndView mav = new ModelAndView("/course/add-course-form");
 
