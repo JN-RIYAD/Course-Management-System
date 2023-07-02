@@ -1,7 +1,6 @@
 package com.cms.controller;
 
 import com.cms.entity.Course;
-import com.cms.entity.Student;
 import com.cms.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +14,9 @@ public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
 
-    @GetMapping({"/list", "/"})
+    @GetMapping({"/list"})
     public ModelAndView getAllCourses() {
- 
+
 
         ModelAndView mav = new ModelAndView("/course/list-courses");
 
@@ -25,10 +24,9 @@ public class CourseController {
 
         return mav;
     }
+
     @GetMapping("/addForm")
     public ModelAndView addForm() {
-
-
 
         ModelAndView mav = new ModelAndView("/course/add-course-form");
 
@@ -66,7 +64,6 @@ public class CourseController {
 
         return "redirect:/course/list";
     }
-
 
 
     @GetMapping("/delete")
