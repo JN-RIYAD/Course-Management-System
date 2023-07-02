@@ -2,14 +2,19 @@ package com.cms.controller;
 
 import com.cms.entity.Course;
 import com.cms.repository.CourseRepository;
+import com.cms.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/course")
 public class CourseController {
+    @Autowired
+    private CourseService courseService;
 
     @Autowired
     private CourseRepository courseRepository;
@@ -17,11 +22,14 @@ public class CourseController {
     @GetMapping({"/list"})
     public ModelAndView getAllCourses() {
 
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/course/list-courses");
 
-        ModelAndView mav = new ModelAndView("/course/list-courses");
+        //List<Course> courseList = courseRepository.findAll();
 
-        mav.addObject("courses", courseRepository.findAll());
+        List<Course> courseList = courseService.findAllCourses();
 
+        mav.addObject("courses", courseList);
         return mav;
     }
 
