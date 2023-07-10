@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/course")
 public class CourseController {
     @Autowired
     private CourseService courseService;
@@ -19,11 +18,11 @@ public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
 
-    @GetMapping({"/list"})
+    @GetMapping({"/course/list"})
     public ModelAndView getAllCourses() {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/course/list-courses");
+        mav.setViewName("/CourseHtmlFolder/list-courses");
 
         //List<Course> courseList = courseRepository.findAll();
 
@@ -33,10 +32,12 @@ public class CourseController {
         return mav;
     }
 
-    @GetMapping("/addForm")
+    @GetMapping("/course/addForm")
     public ModelAndView addForm() {
 
-        ModelAndView mav = new ModelAndView("/course/add-course-form");
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("/CourseHtmlFolder/add-course-form");
 
         Course course = new Course();
 
@@ -45,30 +46,36 @@ public class CourseController {
         return mav;
     }
 
-    @GetMapping("/showUpdateForm")
+    @GetMapping("/course/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long courseId) {
 
-        ModelAndView modelAndView = new ModelAndView("course/update-course-form");
+        ModelAndView modelAndView = new ModelAndView();
 
-        Course course = courseRepository.findById(courseId).get();
+        modelAndView.setViewName("CourseHtmlFolder/update-course-form");
 
-        modelAndView.addObject("course", course);
+        //Course course = courseRepository.findById(courseId).get();
+
+        Course course = courseService.findCourseById(courseId);
+
+       modelAndView.addObject("course", course);
 
         return modelAndView;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/course/save")
     public String save(@ModelAttribute Course course) {
 
-        courseRepository.save(course);
+
+        courseService.saveCourse(course);
 
         return "redirect:/course/list";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/course/update")
     public String update(@ModelAttribute Course course) {
 
-        courseRepository.save(course);
+        courseService.updateCourse(course);
+        //courseRepository.save(course);
 
         return "redirect:/course/list";
     }
@@ -77,7 +84,8 @@ public class CourseController {
     @GetMapping("/delete")
     public String delete(@RequestParam Long courseId) {
 
-        courseRepository.deleteById(courseId);
+        courseService.deleteCourse(courseId);
+        //courseRepository.deleteById(courseId);
 
         return "redirect:/course/list";
     }
