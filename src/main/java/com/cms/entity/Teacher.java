@@ -19,13 +19,13 @@ public class Teacher {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "teacher_name", length = 50, nullable = false, unique = true)
+    @Column(name = "teacher_name", length = 50, nullable = false)
     private String teacherName;
 
-    @Column(name = "teacher_email", length = 10, nullable = false, unique = true)
+    @Column(name = "teacher_email", length = 30, nullable = false, unique = true)
     private String teacherEmail;
 
-    @Column(name = "teacher_tid", nullable = false)
+    @Column(name = "teacher_tid", nullable = false, unique = true)
     private Integer teacherTid;
 
 }
